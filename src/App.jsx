@@ -1,27 +1,25 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Button, Container, Text, TextInput } from "@mantine/core";
-import AppShellMain from "./AppShellMain.jsx";
+import InternalServerError from "./pages/InternalServerError";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Subreddits from "./pages/Subreddits";
+import Posts from "./pages/Posts";
 
 function App() {
-  const [apiUrl] = React.useState(import.meta.env.VITE_API_BASE_URL);
-
   return (
-    <>
-      <AppShellMain>
-        <Container>
-          <Text variant="text" align="left">
-            Welcome to Tafakari - a Reddit clone by Gichana
-          </Text>
-          <Button
-            variant="gradient"
-            gradient={{ from: "indigo", to: "turquoise" }}
-          >
-            Hit Home
-          </Button>
-        </Container>
-      </AppShellMain>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Subreddits />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/subreddits" element={<Subreddits />} />
+        <Route path="/posts" element={<Posts />} />
+
+        <Route path="/500" element={<InternalServerError />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

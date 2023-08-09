@@ -8,11 +8,7 @@ import {
   Text,
   Stack,
 } from "@mantine/core";
-import {
-  IconSocial,
-  IconFlipHorizontal,
-  IconUser,
-} from "@tabler/icons-react";
+import { IconSocial, IconFlipHorizontal, IconUser } from "@tabler/icons-react";
 
 function AppShellMain({ children }) {
   return (
@@ -55,12 +51,12 @@ function AppShellMain({ children }) {
         </Navbar>
       }
       header={
-        <Header height={60} p="xs">
+        <Header height={60} p="md">
           <Container
             style={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "center",
+              alignItems: "left",
             }}
           >
             <Text size="lg" weight={700}>
