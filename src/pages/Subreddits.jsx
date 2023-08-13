@@ -1,12 +1,15 @@
-import { Text } from "@mantine/core";
+import { Box, LoadingOverlay, Text } from "@mantine/core";
 import React from "react";
 import AppShellMain from "../AppShellMain";
-import { fetchData } from "../utils";
 import Subreddit from "../components/Subreddit";
+import { fetchData } from "../utils";
+import LoadingScreen from "../components/LoadingScreen";
+import { useNavigate } from "react-router-dom";
 
 export default function Subreddits() {
   const [subreddits, setSubreddits] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const navigation = useNavigate();
 
   React.useEffect(() => {
     fetchData("/app/subreddits")
@@ -15,19 +18,28 @@ export default function Subreddits() {
         setSubreddits(response.subreddits);
       })
       .catch((error) => {
-        console.log(error);
+        switch (error.status) {
+          case 404:
+            navigation("/not-found");
+            break;
+          case 500:
+            navigation("/server-error");
+            break;
+          default:
+            setIsLoading(true);
+        }
       });
   }, []);
 
   return (
     <AppShellMain>
-      <Text color="blue" component="h1" variant="gradient">
-        {isLoading ? (
-          <Text>Loading</Text>
-        ) : (
+      {isLoading ? (
+        <LoadingScreen isLoading={isLoading} />
+      ) : (
+        <Text color="blue" component="h1" variant="gradient">
           <Subreddit subreddits={subreddits} />
-        )}
-      </Text>
+        </Text>
+      )}
     </AppShellMain>
   );
 }

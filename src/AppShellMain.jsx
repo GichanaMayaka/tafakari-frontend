@@ -9,8 +9,11 @@ import {
   Stack,
 } from "@mantine/core";
 import { IconSocial, IconFlipHorizontal, IconUser } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
 
 function AppShellMain({ children }) {
+  const navigation = useNavigate();
+
   return (
     <AppShell
       padding="md"
@@ -24,6 +27,7 @@ function AppShellMain({ children }) {
                 </Text>
               }
               icon={<IconSocial size="2rem" stroke={1.5} color={"#862d2d"} />}
+              onClick={() => navigation("/subreddits")}
             />
             <NavLink
               label={
@@ -38,6 +42,7 @@ function AppShellMain({ children }) {
                   color={"#862d2d"}
                 />
               }
+              onClick={() => navigation("/posts")}
             />
             <NavLink
               label={
@@ -46,6 +51,7 @@ function AppShellMain({ children }) {
                 </Text>
               }
               icon={<IconUser size="2rem" stroke={1.5} color={"#862d2d"} />}
+              onClick={() => navigation("/profile")}
             />
           </Stack>
         </Navbar>

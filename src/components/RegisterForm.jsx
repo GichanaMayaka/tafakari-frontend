@@ -53,10 +53,11 @@ export default function RegisterForm() {
             break;
           case 500:
             setFailedRegister(true);
-            navigation("/500");
+            navigation("/server-error");
             break;
           default:
             setErrorMessage("Failed");
+            setErrorMessage("There is an Error");
         }
       });
   }

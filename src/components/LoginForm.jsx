@@ -39,11 +39,17 @@ export default function LoginForm() {
         navigation("/register");
       })
       .catch((error) => {
-        if (error.status === 401) {
-          setFailedAuth(true);
-          setErrorMessage("Unrecognised credentials");
-        } else if (error.status >= 500) {
-          navigation("/500");
+        switch (error.status) {
+          case 401:
+            setFailedAuth(true);
+            setErrorMessage("Unrecognised credentials");
+            break;
+          case 500:
+            navigation("/server-error");
+            break;
+          default:
+            setFailedAuth(true);
+            setErrorMessage("Failed Authentication");
         }
       });
   }
