@@ -7,6 +7,7 @@ import Posts from "./pages/Posts";
 import Register from "./pages/Register";
 import Subreddits from "./pages/Subreddits";
 import Logout from "./pages/Logout";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
         <Route path="/subreddits" element={<Subreddits />} />
         <Route path="/posts" element={<Posts />} />
 
-        <Route path="/not-found" element={<InternalServerError />}></Route>
-        <Route path="/server-error" element={<InternalServerError />}></Route>
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="/server-error" element={<InternalServerError />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
