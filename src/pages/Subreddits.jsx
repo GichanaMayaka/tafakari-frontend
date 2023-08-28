@@ -1,10 +1,10 @@
-import { Box, LoadingOverlay, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import React from "react";
-import AppShellMain from "../AppShellMain";
+import { useNavigate } from "react-router-dom";
+import AppShellMain from "../components/AppShellMain.jsx";
+import LoadingScreen from "../components/LoadingScreen";
 import Subreddit from "../components/Subreddit";
 import { fetchData } from "../utils";
-import LoadingScreen from "../components/LoadingScreen";
-import { useNavigate } from "react-router-dom";
 
 export default function Subreddits() {
   const [subreddits, setSubreddits] = React.useState([]);

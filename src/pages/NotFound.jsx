@@ -1,6 +1,6 @@
 import { Text } from "@mantine/core";
 import React from "react";
-import AppShellMain from "../AppShellMain";
+import AppShellMain from "../components/AppShellMain.jsx";
 
 export default function NotFound() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "@mantine/core";
-import AppShellMain from "../AppShellMain";
+import AppShellMain from "../components/AppShellMain.jsx";
 
 export default function InternalServerError() {
   return (

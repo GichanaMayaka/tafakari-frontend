@@ -1,12 +1,16 @@
 import { Text } from "@mantine/core";
 import React from "react";
-import AppShellMain from "../AppShellMain";
+import AppShellMain from "../components/AppShellMain.jsx";
 import { fetchData } from "../utils";
-import Post from "../components/Post";
+import AllPosts from "../components/AllPosts.jsx";
+import LoadingScreen from "../components/LoadingScreen";
+import { useNavigate } from "react-router-dom";
 
 export default function Posts() {
   const [posts, setPosts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+
+  const navigation = useNavigate();
 
   React.useEffect(() => {
     fetchData("/app/posts", "GET")
@@ -15,15 +19,28 @@ export default function Posts() {
         setPosts(response.posts);
       })
       .catch((error) => {
-        console.log(error);
+        switch (error.status) {
+          case 404:
+            navigation("/not-found");
+            break;
+          case 500:
+            navigation("/server-error");
+            break;
+          default:
+            setIsLoading(true);
+        }
       });
   }, []);
 
   return (
     <AppShellMain>
-      <Text color="blue" component="h1">
-        <Post posts={posts} />
-      </Text>
+      { isLoading ? (
+        <LoadingScreen isLoading={ isLoading }/>
+      ) : (
+        <Text color="blue" component="h1">
+          <AllPosts posts={ posts }/>
+        </Text>
+      ) }
     </AppShellMain>
   );
 }
