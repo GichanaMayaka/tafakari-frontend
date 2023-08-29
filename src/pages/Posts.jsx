@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 import React from "react";
 import AppShellMain from "../components/AppShellMain.jsx";
 import { fetchData } from "../utils";
-import AllPosts from "../components/AllPosts.jsx";
+import PostsList from "../components/PostsList.jsx";
 import LoadingScreen from "../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 
@@ -34,13 +34,13 @@ export default function Posts() {
 
   return (
     <AppShellMain>
-      { isLoading ? (
-        <LoadingScreen isLoading={ isLoading }/>
+      {isLoading ? (
+        <LoadingScreen isLoading={isLoading} />
       ) : (
         <Text color="blue" component="h1">
-          <AllPosts posts={ posts }/>
+          <PostsList posts={posts} />
         </Text>
-      ) }
+      )}
     </AppShellMain>
   );
 }

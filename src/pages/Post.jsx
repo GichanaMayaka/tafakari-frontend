@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { fetchData } from "../utils.js";
 import { useNavigate, useParams } from "react-router-dom";
 import AppShellMain from "../components/AppShellMain.jsx";
@@ -13,29 +13,32 @@ function Post({ props }) {
   const navigation = useNavigate();
 
   React.useEffect(() => {
-    fetchData(`/app/posts/${ id }`).then(response => {
+    fetchData(`/app/posts/${id}`)
+      .then((response) => {
         setPost(response);
         setIsLoading(false);
-      }
-    ).catch((error) => {
-      switch (error.status) {
-        case 404:
-          navigation("/not-found");
-          break;
-        case 500:
-          navigation("/server-error");
-          break;
-        default:
-          setIsLoading(true);
-      }
-    });
-  });
+      })
+      .catch((error) => {
+        switch (error.status) {
+          case 404:
+            navigation("/not-found");
+            break;
+          case 500:
+            navigation("/server-error");
+            break;
+          default:
+            setIsLoading(true);
+        }
+      });
+  }, []);
 
   return (
     <AppShellMain>
-      { isLoading ? <LoadingOverlay visible={ isLoading }/> :
-        <PostCard post={ post } postId={ post.id }/>
-      }
+      {isLoading ? (
+        <LoadingOverlay visible={isLoading} />
+      ) : (
+        <PostCard post={post} postId={post.id} showCommentCard={true} />
+      )}
     </AppShellMain>
   );
 }
