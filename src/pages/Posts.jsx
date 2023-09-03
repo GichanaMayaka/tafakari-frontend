@@ -1,10 +1,10 @@
 import { Text } from "@mantine/core";
 import React from "react";
-import AppShellMain from "../components/AppShellMain.jsx";
-import { fetchData } from "../utils";
-import PostsList from "../components/PostsList.jsx";
-import LoadingScreen from "../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
+import AppShellMain from "../components/AppShellMain.jsx";
+import LoadingScreen from "../components/LoadingScreen";
+import PostsList from "../components/PostsList.jsx";
+import { fetchData } from "../utils";
 
 export default function Posts() {
   const [posts, setPosts] = React.useState([]);

@@ -1,9 +1,9 @@
 import { Button, Group, PasswordInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../utils.js";
-import { useCookies } from "react-cookie";
 
 export default function LoginForm() {
   const [failedAuth, setFailedAuth] = React.useState(true);
@@ -36,7 +36,8 @@ export default function LoginForm() {
           path: "/",
           expires,
         });
-        navigation("/register");
+        navigation("/subreddits");
+        localStorage.setItem("username", response.username);
       })
       .catch((error) => {
         switch (error.status) {

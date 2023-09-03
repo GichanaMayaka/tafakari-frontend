@@ -9,7 +9,7 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
 
-function EditorComponent() {
+function EditorComponent({ postId }) {
   const [editorContent, setEditorContent] = React.useState("");
 
   const editor = useEditor({
@@ -20,7 +20,11 @@ function EditorComponent() {
       Underline,
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Placeholder.configure({ placeholder: "Post as Username" }),
+      Placeholder.configure({
+        placeholder: `Post as ${
+          localStorage.getItem("username") || "Anonymous"
+        }`,
+      }),
     ],
     onUpdate({ editor }) {
       setEditorContent(editor.getHTML());
@@ -28,7 +32,11 @@ function EditorComponent() {
   });
 
   return (
-    <form>
+    <form
+      onSubmit={() => {
+        console.log(postId);
+      }}
+    >
       <Stack>
         <Text align="left">Add a Comment</Text>
         <RichTextEditor editor={editor}>
@@ -72,13 +80,14 @@ function EditorComponent() {
             </RichTextEditor.ControlsGroup>
           </RichTextEditor.Toolbar>
 
-          <RichTextEditor.Content />
+          <RichTextEditor.Content h={150} autoFocus />
         </RichTextEditor>
         <Flex justify="flex-end" align="center" direction="row">
           <Button
+            disabled={!editorContent}
             variant="gradient"
             gradient={{ from: "indigo", to: "cyan" }}
-            onClick={(e) => console.log(editorContent)}
+            type="submit"
           >
             Post a Comment
           </Button>

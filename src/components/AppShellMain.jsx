@@ -1,14 +1,14 @@
-import React from "react";
 import {
   AppShell,
-  Container,
+  Flex,
   Header,
-  Navbar,
   NavLink,
-  Text,
+  Navbar,
   Stack,
+  Text,
 } from "@mantine/core";
-import { IconSocial, IconFlipHorizontal, IconUser } from "@tabler/icons-react";
+import { IconFlipHorizontal, IconSocial, IconUser } from "@tabler/icons-react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function AppShellMain({ children }) {
@@ -16,9 +16,9 @@ function AppShellMain({ children }) {
 
   return (
     <AppShell
-      padding="md"
+      padding="xs"
       navbar={
-        <Navbar width={{ base: 300 }} height={500} withBorder={false} p="xs">
+        <Navbar width={{ base: 300 }} withBorder={false} p="xs">
           <Stack align="center" spacing="md" h={300}>
             <NavLink
               label={
@@ -58,17 +58,11 @@ function AppShellMain({ children }) {
       }
       header={
         <Header height={60} p="md">
-          <Container
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "left",
-            }}
-          >
+          <Flex align="center" justify="flex-start">
             <Text size="lg" weight={700}>
               Tafakari
             </Text>
-          </Container>
+          </Flex>
         </Header>
       }
       styles={(theme) => ({
@@ -80,7 +74,9 @@ function AppShellMain({ children }) {
         },
       })}
     >
-      {children}
+      <Flex direction="column" gap="xs" justify="center">
+        {children}
+      </Flex>
     </AppShell>
   );
 }

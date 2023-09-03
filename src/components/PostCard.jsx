@@ -9,7 +9,7 @@ export default function PostCard({ post, postId, showCommentCard }) {
   return (
     <>
       <Card align="center" key={postId} radius="md" withBorder mt={10}>
-        <Grid gutter="md" justify="left">
+        <Grid gutter="xl" justify="left">
           <Grid.Col span={1}>
             <Link to={`/upvote`} relative>
               <IconArrowBigUpLine size={15} />
@@ -48,7 +48,7 @@ export default function PostCard({ post, postId, showCommentCard }) {
 
       {showCommentCard ? (
         <Card radius="md" withBorder mt={10}>
-          <EditorComponent />
+          <EditorComponent postId={post.id} />
         </Card>
       ) : null}
 
