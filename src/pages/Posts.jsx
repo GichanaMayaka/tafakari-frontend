@@ -5,6 +5,7 @@ import AppShellMain from "../components/AppShellMain.jsx";
 import LoadingScreen from "../components/LoadingScreen";
 import PostsList from "../components/PostsList.jsx";
 import { fetchData } from "../utils";
+import CreateAPost from "../components/CreateAPost.jsx";
 
 export default function Posts() {
   const [posts, setPosts] = React.useState([]);
@@ -37,9 +38,12 @@ export default function Posts() {
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} />
       ) : (
-        <Text color="blue" component="h1">
-          <PostsList posts={posts} />
-        </Text>
+        <>
+          <CreateAPost />
+          <Text color="blue" component="h1">
+            <PostsList posts={posts} />
+          </Text>
+        </>
       )}
     </AppShellMain>
   );

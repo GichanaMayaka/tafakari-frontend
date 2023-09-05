@@ -2,8 +2,8 @@ import { Card, Flex, Grid, Stack, Text } from "@mantine/core";
 import { IconArrowBigDownLine, IconArrowBigUpLine } from "@tabler/icons-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import CommentEditor from "./CommentEditor.jsx";
 import CommentsList from "./CommentsList.jsx";
-import EditorComponent from "./EditorComponent.jsx";
 
 export default function PostCard({ post, postId, showCommentCard }) {
   return (
@@ -48,7 +48,7 @@ export default function PostCard({ post, postId, showCommentCard }) {
 
       {showCommentCard ? (
         <Card radius="md" withBorder mt={10}>
-          <EditorComponent postId={post.id} />
+          <CommentEditor postId={post.id} />
         </Card>
       ) : null}
 

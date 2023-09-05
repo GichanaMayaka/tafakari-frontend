@@ -9,26 +9,28 @@ import Subreddits from "./pages/Subreddits";
 import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
 import Post from "./pages/Post.jsx";
+import PostEditor from "./components/PostEditor";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={ <Subreddits/> }/>
+        <Route path="/" element={<Posts />} />
 
-        <Route path="/register" element={ <Register/> }/>
-        <Route path="/login" element={ <Login/> }/>
-        <Route path="/logout" element={ <Logout/> }/>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
 
-        <Route path="/subreddits" element={ <Subreddits/> }/>
-        <Route path="/posts" element={ <Posts/> }/>
-        <Route path="/posts" element={ <Posts/> }/>
-        <Route exact path="/posts/:id" element={ <Post/> }/>
+        <Route path="/subreddits" element={<Subreddits />} />
 
-        <Route path="/not-found" element={ <NotFound/> }/>
-        <Route path="/server-error" element={ <InternalServerError/> }/>
+        <Route path="/posts" element={<Posts />} />
+        <Route exact path="/posts/:id" element={<Post />} />
+        <Route path="/submit" element={<PostEditor />} />
 
-        <Route path="*" element={ <NotFound/> }/>
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="/server-error" element={<InternalServerError />} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

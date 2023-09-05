@@ -1,13 +1,22 @@
+import { useCookies } from "react-cookie";
+
 const init = {
   mode: "cors",
   headers: {
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
   },
   redirect: "follow",
   referrerPolicy: "no-referrer",
 };
 
-export async function postData(url = "", data = {}, method = "POST") {
+export async function postData(
+  url = "",
+  data = {},
+  method = "POST",
+  accessToken
+) {
+  init.headers["Authorization"] = `Bearer ${accessToken}`;
   const response = await fetch(url, {
     ...init,
     method: `${method}`,
