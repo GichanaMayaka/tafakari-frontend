@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import PostEditor from "./components/PostEditor";
 import InternalServerError from "./pages/InternalServerError";
 import Login from "./pages/Login";
-import Posts from "./pages/Posts";
-import Register from "./pages/Register";
-import Subreddits from "./pages/Subreddits";
 import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
 import Post from "./pages/Post.jsx";
-import PostEditor from "./components/PostEditor";
+import Posts from "./pages/Posts";
+import Register from "./pages/Register";
+import Subreddits from "./pages/Subreddits";
 
 function App() {
   return (
