@@ -14,7 +14,7 @@ function Post() {
       {isLoading ? (
         <LoadingOverlay visible={isLoading} />
       ) : (
-        <PostCard post={post} postId={post.id} showCommentCard={true} />
+        <PostCard post={post} showCommentCard={true} />
       )}
     </AppShellMain>
   );

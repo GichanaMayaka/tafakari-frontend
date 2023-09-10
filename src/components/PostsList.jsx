@@ -1,6 +1,6 @@
 import React from "react";
-import PostCard from "./PostCard";
 import { useNavigate } from "react-router-dom";
+import PostCard from "./PostCard";
 
 export default function PostsList({ posts }) {
   const navigation = useNavigate();
@@ -9,7 +9,7 @@ export default function PostsList({ posts }) {
     return (
       <>
         <a onClick={(e) => navigation(`${post.id}`)}>
-          <PostCard post={post} postId={post.id} showCommentCard={false} />
+          <PostCard post={post} showCommentCard={false} />
         </a>
       </>
     );

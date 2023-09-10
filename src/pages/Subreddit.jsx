@@ -17,9 +17,9 @@ export default function Subreddit() {
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} />
       ) : (
-        <Card radius="md">
+        <Card radius="md" withBorder>
           <Text align="center" component="h1" fw="bolder">
-            {subreddit.name}
+            r/{subreddit.name}
           </Text>
         </Card>
       )}

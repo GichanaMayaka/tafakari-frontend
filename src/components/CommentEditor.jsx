@@ -57,7 +57,11 @@ function CommentEditor({ postId }) {
   }
 
   return (
-    <form onSubmit={() => handleSubmit(postId)}>
+    <form
+      onSubmit={(e) => {
+        handleSubmit(postId);
+      }}
+    >
       <Stack>
         <Text align="left">Add a Comment</Text>
         <RichTextEditorComponent editor={editor} />

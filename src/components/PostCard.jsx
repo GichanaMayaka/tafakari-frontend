@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import CommentEditor from "./CommentEditor.jsx";
 import CommentsList from "./CommentsList.jsx";
 
-export default function PostCard({ post, postId, showCommentCard }) {
+export default function PostCard({ post, showCommentCard }) {
   return (
     <>
-      <Card align="center" key={postId} radius="md" withBorder mt={10}>
+      <Card align="center" key={post.id} radius="md" withBorder mt={10}>
         <Grid gutter="xl" justify="left">
           <Grid.Col span={1}>
             <Link to={`/upvote`} relative>

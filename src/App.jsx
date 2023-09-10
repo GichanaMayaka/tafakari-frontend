@@ -22,9 +22,10 @@ function App() {
         <Route path="/logout" element={<Logout />} />
 
         <Route exact path="/subreddits/:id" element={<Subreddit />} />
+        <Route exact path="/subreddits/:id/:id" element={<Post />} />
 
         <Route path="/posts" element={<Posts />} />
-        <Route exact path="/posts/:id" element={<Post />} />
+        <Route exact path="posts/:id" element={<Post />} />
         <Route path="/submit" element={<PostEditor />} />
 
         <Route path="/not-found" element={<NotFound />} />
