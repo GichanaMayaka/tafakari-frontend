@@ -41,3 +41,20 @@ export function usePost(id) {
 
   return [post, isLoading];
 }
+
+export function usePostInSubeddit(id) {
+  const navigation = useNavigate();
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchData(`/app/subreddits/${id}/posts`)
+      .then((response) => {
+        setPosts(response.posts);
+        setIsLoading(false);
+      })
+      .catch((error) => errorHandler(error.status, navigation, setIsLoading));
+  }, [id]);
+
+  return [posts, isLoading];
+}

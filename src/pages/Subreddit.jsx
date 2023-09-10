@@ -1,19 +1,32 @@
+import { Card, Text } from "@mantine/core";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AppShellMain from "../components/AppShellMain";
-import { useSubreddit } from "../hooks/useSubreddits";
 import LoadingScreen from "../components/LoadingScreen";
+import PostsList from "../components/PostsList";
+import { usePostInSubeddit } from "../hooks/usePosts";
+import { useSubreddit } from "../hooks/useSubreddits";
 
 export default function Subreddit() {
   const { id } = useParams();
   const [subreddit, isLoading] = useSubreddit(id);
+  const [subredditPosts, postsAreLoading] = usePostInSubeddit(id);
 
   return (
     <AppShellMain>
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} />
       ) : (
-        <>Subreddit {subreddit.name}</>
+        <Card radius="md">
+          <Text align="center" component="h1" fw="bolder">
+            {subreddit.name}
+          </Text>
+        </Card>
+      )}
+      {postsAreLoading ? (
+        <LoadingScreen isLoading={postsAreLoading} />
+      ) : (
+        <PostsList posts={subredditPosts} />
       )}
     </AppShellMain>
   );

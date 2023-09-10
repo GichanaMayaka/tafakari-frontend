@@ -9,7 +9,6 @@ import NotFound from "./pages/NotFound";
 import Post from "./pages/Post.jsx";
 import Posts from "./pages/Posts";
 import Register from "./pages/Register";
-import Subreddits from "./pages/Subreddits";
 import Subreddit from "./pages/Subreddit";
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
 
-        <Route path="/subreddits" element={<Subreddits />} />
         <Route exact path="/subreddits/:id" element={<Subreddit />} />
 
         <Route path="/posts" element={<Posts />} />
