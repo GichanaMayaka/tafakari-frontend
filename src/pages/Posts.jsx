@@ -1,37 +1,13 @@
 import { Text } from "@mantine/core";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import AppShellMain from "../components/AppShellMain.jsx";
+import CreateAPost from "../components/CreateAPost.jsx";
 import LoadingScreen from "../components/LoadingScreen";
 import PostsList from "../components/PostsList.jsx";
-import { fetchData } from "../utils";
-import CreateAPost from "../components/CreateAPost.jsx";
+import usePosts from "../hooks/usePosts.js";
 
 export default function Posts() {
-  const [posts, setPosts] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-
-  const navigation = useNavigate();
-
-  React.useEffect(() => {
-    fetchData("/app/posts", "GET")
-      .then((response) => {
-        setIsLoading(false);
-        setPosts(response.posts);
-      })
-      .catch((error) => {
-        switch (error.status) {
-          case 404:
-            navigation("/not-found");
-            break;
-          case 500:
-            navigation("/server-error");
-            break;
-          default:
-            setIsLoading(true);
-        }
-      });
-  }, []);
+  const [posts, isLoading] = usePosts();
 
   return (
     <AppShellMain>

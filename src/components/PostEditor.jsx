@@ -8,16 +8,17 @@ import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
-import { fetchData, postData } from "../utils";
-import AppShellMain from "./AppShellMain";
-import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { useSubreddits } from "../hooks/useSubreddits";
+import { postData } from "../utils";
+import AppShellMain from "./AppShellMain";
+import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 
 export default function PostEditor() {
   const [cookies] = useCookies();
   const navigation = useNavigate();
-  const [availableSubreddits, setAvailableSubreddits] = React.useState([
+  const [availableSubreddits] = useSubreddits([
     // Initialize with a placeholder value
     {
       id: 0,
@@ -48,24 +49,6 @@ export default function PostEditor() {
       setEditorContent(editor.getHTML());
     },
   });
-
-  React.useEffect(() => {
-    fetchData("/app/subreddits")
-      .then((response) => {
-        setAvailableSubreddits(
-          response.subreddits.map((subs) => {
-            return {
-              id: subs.id,
-              value: subs.id,
-              label: `r/${subs.name}`,
-            };
-          })
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   function handleCreatePost(event) {
     event.preventDefault();

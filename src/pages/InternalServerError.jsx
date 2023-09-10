@@ -1,13 +1,20 @@
 import React from "react";
-import { Text } from "@mantine/core";
+import { Image, Text } from "@mantine/core";
 import AppShellMain from "../components/AppShellMain.jsx";
 
 export default function InternalServerError() {
   return (
     <AppShellMain>
-      <Text color="red" component="h2">
-        There's an error with the Server. It's not you, it's us.
-      </Text>
+      <Image
+        maw={240}
+        // mx="auto"
+        radius="md"
+        src="../../public/505.jpg"
+        alt="server error"
+        width="auto"
+        // height="auto"
+        fit="fill"
+      />
     </AppShellMain>
   );
 }

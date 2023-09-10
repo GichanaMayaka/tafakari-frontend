@@ -10,6 +10,7 @@ import Post from "./pages/Post.jsx";
 import Posts from "./pages/Posts";
 import Register from "./pages/Register";
 import Subreddits from "./pages/Subreddits";
+import Subreddit from "./pages/Subreddit";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
 
         <Route path="/subreddits" element={<Subreddits />} />
+        <Route exact path="/subreddits/:id" element={<Subreddit />} />
 
         <Route path="/posts" element={<Posts />} />
         <Route exact path="/posts/:id" element={<Post />} />

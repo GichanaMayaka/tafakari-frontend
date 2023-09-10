@@ -36,7 +36,7 @@ export default function LoginForm() {
           path: "/",
           expires,
         });
-        navigation("/subreddits");
+        navigation("/posts");
         localStorage.setItem("username", response.username);
       })
       .catch((error) => {

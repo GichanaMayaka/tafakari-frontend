@@ -1,5 +1,3 @@
-import { useCookies } from "react-cookie";
-
 const init = {
   mode: "cors",
   headers: {
@@ -41,4 +39,23 @@ export async function fetchData(url = "", method = "GET") {
   }
 
   return response.json();
+}
+
+export function errorHandler(errorStatusCode, navigator, loadingSetter) {
+  switch (errorStatusCode) {
+    case 401:
+      navigator("/login");
+      break;
+    case 404:
+      navigator("/not-found");
+      break;
+    case 422:
+      navigator("/login");
+      break;
+    case 500:
+      navigator("/server-error");
+      break;
+    default:
+      loadingSetter(true);
+  }
 }

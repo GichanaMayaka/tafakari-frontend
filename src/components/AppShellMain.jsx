@@ -4,15 +4,26 @@ import {
   Header,
   NavLink,
   Navbar,
+  Select,
   Stack,
   Text,
 } from "@mantine/core";
-import { IconFlipHorizontal, IconSocial, IconUser } from "@tabler/icons-react";
+import { IconFlipHorizontal, IconUser } from "@tabler/icons-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSubreddits } from "../hooks/useSubreddits";
 
 function AppShellMain({ children }) {
   const navigation = useNavigate();
+
+  const [availableSubreddits] = useSubreddits([
+    // Initialize with a placeholder value
+    {
+      id: 0,
+      value: "Loading...",
+      label: "Loading...",
+    },
+  ]);
 
   return (
     <AppShell
@@ -20,15 +31,6 @@ function AppShellMain({ children }) {
       navbar={
         <Navbar width={{ base: 300 }} withBorder={false} p="xs">
           <Stack align="center" spacing="md" h={300}>
-            <NavLink
-              label={
-                <Text size="lg" weight={700}>
-                  Subreddits
-                </Text>
-              }
-              icon={<IconSocial size="2rem" stroke={1.5} color={"#862d2d"} />}
-              onClick={() => navigation("/subreddits")}
-            />
             <NavLink
               label={
                 <Text size="lg" weight={700}>
@@ -58,10 +60,16 @@ function AppShellMain({ children }) {
       }
       header={
         <Header height={60} p="md">
-          <Flex align="center" justify="flex-start">
-            <Text size="lg" weight={700}>
+          <Flex align="center" justify="center" gap={30} direction="row">
+            <Text size="xl" weight={900}>
               Tafakari
             </Text>
+            <Select
+              data={availableSubreddits}
+              onChange={(e) => {
+                navigation(`/subreddits/${e}`);
+              }}
+            />
           </Flex>
         </Header>
       }
