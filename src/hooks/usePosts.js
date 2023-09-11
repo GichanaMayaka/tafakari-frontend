@@ -37,7 +37,7 @@ export function usePost(id) {
       .catch((error) => {
         errorHandler(error.status, navigation, setIsLoading);
       });
-  }, []);
+  }, [id]);
 
   return [post, isLoading];
 }
