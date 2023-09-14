@@ -1,15 +1,9 @@
 import { Button, Card, Flex, Select, TextInput } from "@mantine/core";
-import { Link } from "@mantine/tiptap";
-import Highlight from "@tiptap/extension-highlight";
-import Placeholder from "@tiptap/extension-placeholder";
-import { default as Superscript } from "@tiptap/extension-superscript";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useForm } from "@mantine/form";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useRichTextEditor from "../hooks/useRichTextEditor";
 import { useSubreddits } from "../hooks/useSubreddits";
 import { postData } from "../utils";
 import AppShellMain from "./AppShellMain";
@@ -18,6 +12,7 @@ import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 export default function PostEditor() {
   const [cookies] = useCookies();
   const navigation = useNavigate();
+
   const [availableSubreddits] = useSubreddits([
     // Initialize with a placeholder value
     {
@@ -27,36 +22,21 @@ export default function PostEditor() {
     },
   ]);
 
-  const [title, setTitle] = React.useState("");
-  const [editorContent, setEditorContent] = React.useState("");
-  const [subredditId, setSubredditId] = React.useState();
-
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Link,
-      Superscript,
-      Underline,
-      Highlight,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Placeholder.configure({
-        placeholder: `Post as ${
-          localStorage.getItem("username") || "Anonymous"
-        }`,
-      }),
-    ],
-    onUpdate({ editor }) {
-      setEditorContent(editor.getHTML());
+  const form = useForm({
+    initialValues: { title: "", editorContent: "", subredditId: "" },
+    validate: {
+      title: (value) =>
+        value.length < 2 ? "Title must have at least 2 letters" : null,
     },
   });
 
-  function handleCreatePost(event) {
-    event.preventDefault();
+  const [editor, editorContent] = useRichTextEditor(form);
 
+  function handleCreatePost(formValues) {
     const payload = {
-      subreddit_id: subredditId,
-      title: title,
-      text: editorContent,
+      subreddit_id: formValues.subredditId,
+      title: formValues.title,
+      text: formValues.editorContent,
     };
 
     postData("/app/posts", payload, "POST", cookies.access_token)
@@ -72,22 +52,25 @@ export default function PostEditor() {
 
   return (
     <AppShellMain>
-      <form onSubmit={handleCreatePost}>
+      <form onSubmit={form.onSubmit((values) => handleCreatePost(values))}>
         <Select
           data={availableSubreddits}
           mb={10}
           placeholder="Choose a Community"
           searchable
           nothingFound="No options"
-          onChange={setSubredditId}
+          {...form.getInputProps("subredditId")}
         />
         <Card>
           <TextInput
             placeholder="Title"
             mb={15}
-            onChange={(e) => setTitle(e.target.value)}
+            {...form.getInputProps("title")}
           ></TextInput>
-          <RichTextEditorComponent editor={editor} />
+          <RichTextEditorComponent
+            editor={editor}
+            {...form.getInputProps("editorContent")}
+          />
           <Flex justify="flex-end" align="center" direction="row">
             <Button
               disabled={!editorContent}

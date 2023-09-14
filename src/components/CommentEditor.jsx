@@ -1,44 +1,28 @@
 import { Button, Flex, Stack, Text } from "@mantine/core";
-import { Link } from "@mantine/tiptap";
-import Highlight from "@tiptap/extension-highlight";
-import Placeholder from "@tiptap/extension-placeholder";
-import { default as Superscript } from "@tiptap/extension-superscript";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { useForm } from "@mantine/form";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useRichTextEditor from "../hooks/useRichTextEditor";
 import { postData } from "../utils";
 import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 
 function CommentEditor({ postId }) {
-  const [editorContent, setEditorContent] = React.useState("");
   const [cookies] = useCookies();
   const navigation = useNavigate();
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Link,
-      Superscript,
-      Underline,
-      Highlight,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
-      Placeholder.configure({
-        placeholder: `Post as ${
-          localStorage.getItem("username") || "Anonymous"
-        }`,
-      }),
-    ],
-    onUpdate({ editor }) {
-      setEditorContent(editor.getHTML());
+  const form = useForm({
+    initialValues: { editorContent: "" },
+    validate: {
+      editorContent: (value) =>
+        value.length < 2 ? "Comment must have at least 2 letters" : null,
     },
   });
 
-  function handleSubmit(postId = postId) {
-    const payload = { comment: editorContent };
+  const [editor, editorContent] = useRichTextEditor(form);
+
+  function handleSubmit(formValues) {
+    const payload = { comment: formValues.editorContent };
 
     postData(
       `/app/posts/${postId}/comments`,
@@ -50,21 +34,20 @@ function CommentEditor({ postId }) {
         navigation("", { replace: true });
       })
       .catch((error) => {
-        if (error.status === 401) {
+        if (error.status === 401 || error.status === 422) {
           navigation("/login");
         }
       });
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(postId);
-      }}
-    >
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <Stack>
         <Text align="left">Add a Comment</Text>
-        <RichTextEditorComponent editor={editor} />
+        <RichTextEditorComponent
+          editor={editor}
+          {...form.getInputProps("editorContent")}
+        />
         <Flex justify="flex-end" align="center" direction="row">
           <Button
             disabled={!editorContent}
