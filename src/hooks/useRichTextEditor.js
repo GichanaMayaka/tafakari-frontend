@@ -7,9 +7,11 @@ import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
+import { useDebounce } from "use-debounce";
 
 export default function useRichTextEditor(form) {
   const [editorContent, setEditorContent] = React.useState("");
+  const [content] = useDebounce(editorContent, 1000);
 
   const editor = useEditor({
     extensions: [
@@ -32,5 +34,5 @@ export default function useRichTextEditor(form) {
     },
   });
 
-  return [editor, editorContent];
+  return [editor, content];
 }

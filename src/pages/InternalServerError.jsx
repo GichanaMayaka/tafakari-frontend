@@ -7,12 +7,10 @@ export default function InternalServerError() {
     <AppShellMain>
       <Image
         maw={240}
-        // mx="auto"
         radius="md"
-        src="../../public/505.jpg"
+        src="../../public/500.jpg"
         alt="server error"
         width="auto"
-        // height="auto"
         fit="fill"
       />
     </AppShellMain>

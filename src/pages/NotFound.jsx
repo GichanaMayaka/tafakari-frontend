@@ -7,10 +7,9 @@ export default function NotFound() {
     <AppShellMain>
       <Image
         maw={240}
-        // mx="auto"
         radius="md"
         src="../../public/404.jpg"
-        alt="server error"
+        alt="not found"
         width="auto"
         height="auto"
         fit="fill"

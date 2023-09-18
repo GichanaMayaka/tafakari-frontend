@@ -1,6 +1,6 @@
 import { Flex, Stack, Text } from "@mantine/core";
 import { IconArrowBigDownLine, IconArrowBigUpLine } from "@tabler/icons-react";
-import { default as React, default as React } from "react";
+import { default as React } from "react";
 import { Link } from "react-router-dom";
 
 export default function CommentCard({ comment }) {

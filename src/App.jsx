@@ -10,6 +10,7 @@ import Post from "./pages/Post.jsx";
 import Posts from "./pages/Posts";
 import Register from "./pages/Register";
 import Subreddit from "./pages/Subreddit";
+import CreateSubreddit from "./pages/CreateSubreddit";
 
 function App() {
   return (
@@ -21,12 +22,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
 
+        <Route path="/subreddits/new" element={<CreateSubreddit />} />
         <Route exact path="/subreddits/:id" element={<Subreddit />} />
         <Route exact path="/subreddits/:id/:id" element={<Post />} />
 
         <Route path="/posts" element={<Posts />} />
         <Route exact path="posts/:id" element={<Post />} />
         <Route path="/submit" element={<PostEditor />} />
+
+        <Route path="/profile" element={<Login />} />
 
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/server-error" element={<InternalServerError />} />

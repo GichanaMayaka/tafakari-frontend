@@ -1,5 +1,7 @@
 import {
   AppShell,
+  Container,
+  Divider,
   Flex,
   Header,
   NavLink,
@@ -8,10 +10,11 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { IconFlipHorizontal, IconUser } from "@tabler/icons-react";
+import { IconFlipHorizontal, IconUser, IconPlus } from "@tabler/icons-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSubreddits } from "../hooks/useSubreddits";
+import CommunitiesNavigation from "./CommunitiesNavigation";
 
 function AppShellMain({ children }) {
   const navigation = useNavigate();
@@ -55,6 +58,8 @@ function AppShellMain({ children }) {
               icon={<IconUser size="2rem" stroke={1.5} color={"#862d2d"} />}
               onClick={() => navigation("/profile")}
             />
+            <Divider />
+            <CommunitiesNavigation />
           </Stack>
         </Navbar>
       }

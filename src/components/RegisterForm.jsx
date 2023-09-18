@@ -36,7 +36,6 @@ export default function RegisterForm() {
   function handleRegister(url, payload, method) {
     postData(url, payload, method)
       .then((response) => {
-        console.log(response.access_token);
         navigation("/");
       })
       .catch((error) => {
@@ -74,19 +73,19 @@ export default function RegisterForm() {
         placeholder="your@email.com"
         radius="md"
         {...form.getInputProps("email")}
-      ></TextInput>
+      />
       <TextInput
         label="Username"
         placeholder="username"
         radius="md"
         {...form.getInputProps("username")}
-      ></TextInput>
+      />
       <PasswordInput
         label="Password"
         placeholder="password"
         radius="md"
         {...form.getInputProps("password")}
-      ></PasswordInput>
+      />
       <Checkbox
         mt="md"
         label="I agree to sell my privacy"
