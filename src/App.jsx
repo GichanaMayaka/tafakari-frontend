@@ -2,15 +2,16 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import PostEditor from "./components/PostEditor";
+import CreateSubreddit from "./pages/CreateSubreddit";
 import InternalServerError from "./pages/InternalServerError";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import NotFound from "./pages/NotFound";
 import Post from "./pages/Post.jsx";
 import Posts from "./pages/Posts";
+import Profile from "./pages/Profile.jsx";
 import Register from "./pages/Register";
 import Subreddit from "./pages/Subreddit";
-import CreateSubreddit from "./pages/CreateSubreddit";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route exact path="posts/:id" element={<Post />} />
         <Route path="/submit" element={<PostEditor />} />
 
-        <Route path="/profile" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
 
         <Route path="/not-found" element={<NotFound />} />
         <Route path="/server-error" element={<InternalServerError />} />

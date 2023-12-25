@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchData, errorHandler } from "../utils";
+import { errorHandler, fetchData } from "../utils";
 
 export default function usePosts() {
   const [posts, setPosts] = React.useState([]);

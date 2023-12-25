@@ -23,7 +23,7 @@ export default function CommunitiesNavigation() {
         </Text>
       }
     >
-      <Container>
+      <Container px={0}>
         <NavLink
           label={
             <Text size="md" weight={700}>

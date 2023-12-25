@@ -1,6 +1,6 @@
 import React from "react";
-import { errorHandler, fetchData } from "../utils.js";
 import { useNavigate } from "react-router-dom";
+import { errorHandler, fetchData } from "../utils.js";
 
 export function useSubreddits(
   initial = {

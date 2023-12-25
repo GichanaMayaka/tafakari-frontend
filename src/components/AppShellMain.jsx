@@ -1,6 +1,5 @@
 import {
   AppShell,
-  Container,
   Divider,
   Flex,
   Header,
@@ -10,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@mantine/core";
-import { IconFlipHorizontal, IconUser, IconPlus } from "@tabler/icons-react";
+import { IconFlipHorizontal, IconUser } from "@tabler/icons-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSubreddits } from "../hooks/useSubreddits";
@@ -33,7 +32,7 @@ function AppShellMain({ children }) {
       padding="xs"
       navbar={
         <Navbar width={{ base: 300 }} withBorder={false} p="xs">
-          <Stack align="center" spacing="md" h={300}>
+          <Stack align="left" spacing="md" h={300}>
             <NavLink
               label={
                 <Text size="lg" weight={700}>
@@ -87,7 +86,7 @@ function AppShellMain({ children }) {
         },
       })}
     >
-      <Flex direction="column" gap="xs" justify="center">
+      <Flex direction="column" gap="xs" justify="center" pl={"3rem"} pr={"3rem"}>
         {children}
       </Flex>
     </AppShell>

@@ -31,7 +31,7 @@ function CommentEditor({ postId }) {
       cookies.access_token
     )
       .then((response) => {
-        navigation("", { replace: true });
+        window.location.reload();
       })
       .catch((error) => {
         if (error.status === 401 || error.status === 422) {

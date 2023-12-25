@@ -28,7 +28,10 @@ export async function postData(
   return response.json();
 }
 
-export async function fetchData(url = "", method = "GET") {
+export async function fetchData(url = "", method = "GET", accessToken = null) {
+  if (accessToken) {
+    init.headers["Authorization"] = `Bearer ${accessToken}`;
+  }
   const response = await fetch(url, {
     ...init,
     method: `${method}`,
@@ -57,5 +60,22 @@ export function errorHandler(errorStatusCode, navigator, loadingSetter) {
       break;
     default:
       loadingSetter(true);
+  }
+}
+
+export function calculateTimeDifference(datetimeString) {
+  const now = new Date();
+  const targetDate = new Date(datetimeString);
+  const differenceInMilliseconds = now - targetDate;
+
+  const differenceInMinutes = Math.abs(differenceInMilliseconds / 60_000); // Ensure positive difference
+
+  if (differenceInMinutes >= 60) {
+    const hours = Math.floor(differenceInMinutes / 60);
+    return `${hours} hours`;
+  } else {
+    const minutes = Math.floor(differenceInMinutes);
+    const seconds = Math.round((differenceInMilliseconds % 60000) / 1000);
+    return `${minutes} minutes ${seconds} seconds`;
   }
 }
