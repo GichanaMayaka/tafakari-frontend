@@ -1,11 +1,12 @@
 import React from "react";
 import AppShellMain from "../components/AppShellMain";
 import { Text } from "@mantine/core";
+import CreateSubredditCommunity from "../components/CreateSubredditCommunity";
 
 export default function CreateSubreddit() {
   return (
     <AppShellMain>
-      <Text>Create a Community</Text>
+      <CreateSubredditCommunity />
     </AppShellMain>
   );
 }
