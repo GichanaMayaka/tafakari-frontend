@@ -8,12 +8,12 @@
   margin-right: 0.5rem;
 }
 
-.comment-card-no-link-decoration {
+.link-no-decoration {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
 
-.comment-card-no-link-decoration:hover {
+.link-no-decoration:hover {
   color: #2570bc;
 }

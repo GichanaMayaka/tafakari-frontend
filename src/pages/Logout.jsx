@@ -25,7 +25,20 @@ export default function Logout() {
   return (
     <AppShellMain>
       <Text align="center" component="h1">
-        You have Signed Out
+        You have signed out.
+        <br />
+        You can{" "}
+        <a className="link-no-decoration" onClick={(e) => navigation("/login")}>
+          Login
+        </a>{" "}
+        again to create{" "}
+        <a
+          className="link-no-decoration"
+          onClick={() => navigation("/posts", { replace: true })}
+        >
+          Posts
+        </a>
+        , and Comment.
       </Text>
     </AppShellMain>
   );

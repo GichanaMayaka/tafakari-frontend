@@ -10,6 +10,8 @@ export function useSubreddits(
   }
 ) {
   const [subreddits, setSubreddits] = React.useState(initial);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const navigation = useNavigate();
 
   React.useEffect(() => {
     fetchData("/app/subreddits")
@@ -25,7 +27,7 @@ export function useSubreddits(
         );
       })
       .catch((error) => {
-        console.log(error);
+        errorHandler(error.status, navigation, isLoading);
       });
   }, []);
 
