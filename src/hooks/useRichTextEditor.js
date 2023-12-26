@@ -7,11 +7,13 @@ import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
+import { useCookies } from "react-cookie";
 import { useDebounce } from "use-debounce";
 
 export default function useRichTextEditor(form) {
   const [editorContent, setEditorContent] = React.useState("");
   const [content] = useDebounce(editorContent, 1000);
+  const [cookies, setCookies] = useCookies([]);
 
   const editor = useEditor({
     extensions: [
@@ -22,9 +24,7 @@ export default function useRichTextEditor(form) {
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({
-        placeholder: `Post as ${
-          localStorage.getItem("username") || "Anonymous"
-        }`,
+        placeholder: `Post as ${cookies.username || "Anonymous"}`,
       }),
     ],
     onUpdate({ editor }) {

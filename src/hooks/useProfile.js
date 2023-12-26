@@ -1,24 +1,28 @@
 import React from "react";
 import { useCookies } from "react-cookie";
-import { fetchData } from "../utils";
+import { errorHandler, fetchData } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 export default function useProfile() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [posts, setPosts] = React.useState([]);
   const [subreddits, setSubreddits] = React.useState([]);
+  const [comments, setComments] = React.useState([]);
 
   const [cookies, setCookies] = useCookies([]);
   const accessToken = cookies.access_token;
+  const navigation = useNavigate();
 
   React.useEffect(() => {
     fetchData("/app/profile", "GET", accessToken)
       .then((response) => {
         setPosts(response.posts);
         setSubreddits(response.subreddits);
+        setComments(response.comments);
         setIsLoading(false);
       })
-      .catch((error) => console.log(error.status));
+      .catch((error) => errorHandler(error.status, navigation, setIsLoading));
   }, []);
 
-  return [posts, subreddits, isLoading];
+  return [posts, subreddits, comments, isLoading];
 }

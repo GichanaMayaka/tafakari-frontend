@@ -1,7 +1,8 @@
 import { Tabs } from "@mantine/core";
 import React, { useState } from "react";
-import PostCard from "../components/PostCard";
 import { useNavigate } from "react-router-dom";
+import PostCard from "../components/PostCard";
+import CommentsList from "./CommentsList";
 
 function ProfileTabs({ posts, comments }) {
   const [activeTab, setActiveTab] = useState("posts");
@@ -32,7 +33,9 @@ function ProfileTabs({ posts, comments }) {
           );
         })}
       </Tabs.Panel>
-      <Tabs.Panel value="comments">Comments will go here</Tabs.Panel>
+      <Tabs.Panel value="comments">
+        <CommentsList comments={comments} />
+      </Tabs.Panel>
     </Tabs>
   );
 }

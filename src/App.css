@@ -7,3 +7,13 @@
 .mantine-Tabs-tab {
   margin-right: 0.5rem;
 }
+
+.comment-card-no-link-decoration {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.comment-card-no-link-decoration:hover {
+  color: #2570bc;
+}

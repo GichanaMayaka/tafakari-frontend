@@ -30,14 +30,18 @@ export default function LoginForm() {
     postData(url, payload, method)
       .then((response) => {
         let expires = new Date();
-        expires.setTime(expires.getTime() + response.expires);
+        expires.setTime(expires.getTime() + response.expires * 1000);
 
+        // Set cookies for username, and access token
         setCookie("access_token", response.access_token, {
           path: "/",
           expires,
         });
+        setCookie("username", response.username, {
+          path: "/",
+          expires,
+        });
         navigation("/posts");
-        localStorage.setItem("username", response.username);
       })
       .catch((error) => {
         switch (error.status) {
