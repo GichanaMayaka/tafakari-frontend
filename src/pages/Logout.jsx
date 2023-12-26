@@ -1,11 +1,32 @@
 import { Text } from "@mantine/core";
 import React from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import AppShellMain from "../components/AppShellMain.jsx";
+import { errorHandler, postData } from "../utils.js";
 
 export default function Logout() {
+  const navigation = useNavigate();
+  const [isLoading, setIsLoading] = React.useState([]);
+  const [cookies, setCookies, removeCookies] = useCookies([]);
+
+  React.useEffect(() => {
+    postData("app/auth/logout", null, "DELETE", cookies.access_token)
+      .then((response) => {
+        removeCookies("access_token");
+        removeCookies("username");
+        setTimeout(() => {
+          navigation("/login");
+        }, 60_000);
+      })
+      .catch((error) => errorHandler(error.status, navigation, setIsLoading));
+  }, []);
+
   return (
     <AppShellMain>
-      <Text>Logout</Text>
+      <Text align="center" component="h1">
+        You have Signed Out
+      </Text>
     </AppShellMain>
   );
 }
