@@ -15,12 +15,13 @@ import { IconFlipHorizontal, IconUser } from "@tabler/icons-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useBreakpoints from "../hooks/useBreakpoints";
+import useCookieValues from "../hooks/useCookieValues";
 import { useSubreddits } from "../hooks/useSubreddits";
 import CommunitiesNavigation from "./CommunitiesNavigation";
 
 function AppShellMain({ children }) {
   const navigation = useNavigate();
-
+  const [setCookies, removeCookies, { userName }] = useCookieValues();
   const [opened, toggle] = useBreakpoints();
   const [availableSubreddits] = useSubreddits([
     // Initialize with a placeholder value
@@ -103,13 +104,24 @@ function AppShellMain({ children }) {
                 }}
               />
             </Flex>
-            <Text
-              justify="right"
-              className="link-no-decoration"
-              onClick={() => navigation("/logout")}
-            >
-              Logout
-            </Text>
+            {userName ? (
+              <Text
+                justify="right"
+                className="link-no-decoration"
+                onClick={() => navigation("/logout")}
+              >
+                Logout
+              </Text>
+            ) : (
+              <Text
+                justify="right"
+                className="link-no-decoration"
+                onClick={() => navigation("/login")}
+                mr={5}
+              >
+                Login
+              </Text>
+            )}
           </Flex>
         </Header>
       }

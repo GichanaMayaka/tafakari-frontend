@@ -1,8 +1,8 @@
 import { Button, Card, Flex, Select, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useCookieValues from "../hooks/useCookieValues.js";
 import useRichTextEditor from "../hooks/useRichTextEditor";
 import { useSubreddits } from "../hooks/useSubreddits";
 import { postData } from "../utils";
@@ -10,7 +10,7 @@ import AppShellMain from "./AppShellMain";
 import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 
 export default function PostEditor() {
-  const [cookies] = useCookies();
+  const [setCookies, removeCookies, { accessToken }] = useCookieValues();
   const navigation = useNavigate();
 
   const [availableSubreddits] = useSubreddits([
@@ -39,7 +39,7 @@ export default function PostEditor() {
       text: formValues.editorContent,
     };
 
-    postData("/app/posts", payload, "POST", cookies.access_token)
+    postData("/app/posts", payload, "POST", accessToken)
       .then((response) => {
         navigation("/posts");
       })

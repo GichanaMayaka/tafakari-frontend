@@ -1,14 +1,14 @@
 import { Button, Group, PasswordInput, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useCookieValues from "../hooks/useCookieValues.js";
 import { postData } from "../utils.js";
 
 export default function LoginForm() {
   const [failedAuth, setFailedAuth] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [cookie, setCookie] = useCookies([]);
+  const [setCookies] = useCookieValues();
 
   const navigation = useNavigate();
 
@@ -33,11 +33,11 @@ export default function LoginForm() {
         expires.setTime(expires.getTime() + response.expires * 1000);
 
         // Set cookies for username, and access token
-        setCookie("access_token", response.access_token, {
+        setCookies("access_token", response.access_token, {
           path: "/",
           expires,
         });
-        setCookie("username", response.username, {
+        setCookies("username", response.username, {
           path: "/",
           expires,
         });

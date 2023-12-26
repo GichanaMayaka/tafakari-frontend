@@ -1,14 +1,14 @@
 import { Button, Flex, Stack, Text } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useCookieValues from "../hooks/useCookieValues.js";
 import useRichTextEditor from "../hooks/useRichTextEditor";
 import { postData } from "../utils";
 import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 
 function CommentEditor({ postId }) {
-  const [cookies] = useCookies();
+  const [setCookies, removeCookies, { accessToken }] = useCookieValues();
   const navigation = useNavigate();
 
   const form = useForm({
@@ -24,12 +24,7 @@ function CommentEditor({ postId }) {
   function handleSubmit(formValues) {
     const payload = { comment: formValues.editorContent };
 
-    postData(
-      `/app/posts/${postId}/comments`,
-      payload,
-      "POST",
-      cookies.access_token
-    )
+    postData(`/app/posts/${postId}/comments`, payload, "POST", accessToken)
       .then((response) => {
         window.location.reload();
       })

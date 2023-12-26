@@ -1,11 +1,13 @@
 import AppShellMain from "../components/AppShellMain";
 import LoadingScreen from "../components/LoadingScreen";
 import ProfileTabs from "../components/ProfileTabs";
+import useCookieValues from "../hooks/useCookieValues";
 
 import useProfile from "../hooks/useProfile";
 
 function Profile() {
-  const [posts, subreddits, comments, isLoading] = useProfile();
+  const [setCookies, removeCookies, { accessToken }] = useCookieValues();
+  const [posts, subreddits, comments, isLoading] = useProfile(accessToken);
 
   return (
     <AppShellMain>

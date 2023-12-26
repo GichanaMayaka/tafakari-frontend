@@ -1,14 +1,14 @@
 import { Button, Card, Flex, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import useCookieValues from "../hooks/useCookieValues.js";
 import useRichTextEditor from "../hooks/useRichTextEditor.js";
 import { postData } from "../utils.js";
 import RichTextEditorComponent from "./RichTextEditorComponent.jsx";
 
 function CreateSubredditCommunity() {
-  const [cookies, setCookies] = useCookies([]);
+  const [setCookies, removeCookies, { accessToken }] = useCookieValues();
   const form = useForm({
     initialValues: { name: "", editorContent: "" },
     validate: {
@@ -27,13 +27,13 @@ function CreateSubredditCommunity() {
       description: formValues.editorContent,
     };
 
-    if (cookies.access_token) {
-      postData("/app/subreddits", payload, "POST", cookies.access_token)
+    if (accessToken) {
+      postData("/app/subreddits", payload, "POST", accessToken)
         .then((response) => console.log(response))
         .catch((error) => console.error(error));
 
       setTimeout(() => {
-        navigation("/subreddits");
+        navigation("/posts");
       }, 60_000);
     } else {
       alert("Can't post as Anonymous. Please Sign in to create a community");

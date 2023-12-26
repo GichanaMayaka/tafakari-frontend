@@ -9,11 +9,12 @@ import StarterKit from "@tiptap/starter-kit";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useDebounce } from "use-debounce";
+import useCookieValues from "./useCookieValues";
 
 export default function useRichTextEditor(form) {
   const [editorContent, setEditorContent] = React.useState("");
   const [content] = useDebounce(editorContent, 1000);
-  const [cookies, setCookies] = useCookies([]);
+  const [setCookies, removeCookies, { userName }] = useCookieValues();
 
   const editor = useEditor({
     extensions: [
@@ -24,7 +25,7 @@ export default function useRichTextEditor(form) {
       Highlight,
       TextAlign.configure({ types: ["heading", "paragraph"] }),
       Placeholder.configure({
-        placeholder: `Post as ${cookies.username || "Anonymous"}`,
+        placeholder: `Post as ${userName || "Anonymous"}`,
       }),
     ],
     onUpdate({ editor }) {
