@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import PostEditor from "./components/PostEditor";
+import PostCreator from "./components/PostCreator.jsx";
+import PostEditor from "./components/PostEditor.jsx";
 import CreateSubreddit from "./pages/CreateSubreddit";
 import InternalServerError from "./pages/InternalServerError";
 import Login from "./pages/Login";
@@ -29,7 +30,8 @@ function App() {
 
         <Route path="/posts" element={<Posts />} />
         <Route exact path="posts/:id" element={<Post />} />
-        <Route path="/submit" element={<PostEditor />} />
+        <Route path="/submit" element={<PostCreator />} />
+        <Route exact path="/post/:id/edit" element={<PostEditor />} />
 
         <Route path="/profile" element={<Profile />} />
 

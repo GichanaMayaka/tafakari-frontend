@@ -7,13 +7,12 @@ import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { useDebounce } from "use-debounce";
 import useCookieValues from "./useCookieValues";
 
-export default function useRichTextEditor(form) {
-  const [editorContent, setEditorContent] = React.useState("");
-  const [content] = useDebounce(editorContent, 1000);
+export default function useRichTextEditor(form, text = "") {
+  const [editorContent, setEditorContent] = React.useState(text);
+  const [content] = useDebounce(editorContent, 500);
   const [setCookies, removeCookies, { userName }] = useCookieValues();
 
   const editor = useEditor({
@@ -28,12 +27,13 @@ export default function useRichTextEditor(form) {
         placeholder: `Post as ${userName || "Anonymous"}`,
       }),
     ],
+    content: text,
     onUpdate({ editor }) {
       const content = editor.getHTML();
       setEditorContent(content);
       form.setFieldValue("editorContent", content);
     },
-  });
+  }, [text]);
 
   return [editor, content];
 }

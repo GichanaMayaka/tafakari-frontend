@@ -11,11 +11,14 @@ export default function Posts() {
 
   return (
     <AppShellMain>
+      <Text align="left" fw="bolder">
+        All Posts
+      </Text>
+      <CreateAPost />
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} />
       ) : (
         <>
-          <CreateAPost />
           <Text color="blue" component="h1">
             <PostsList posts={posts} />
           </Text>

@@ -8,7 +8,7 @@ export default function CommentsList({ comments }) {
 
   return (
     <Card align="left" radius="md" withBorder mt={10}>
-      {comments.map((comment) =>
+      {comments?.map((comment) =>
         comment?.post_id ? (
           <a
             className="link-no-decoration"

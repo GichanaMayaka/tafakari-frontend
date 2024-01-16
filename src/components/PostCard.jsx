@@ -1,11 +1,17 @@
 import { Card, Flex, Grid, Stack, Text } from "@mantine/core";
-import { IconArrowBigDownLine, IconArrowBigUpLine } from "@tabler/icons-react";
+import {
+  IconArrowBigDownLine,
+  IconArrowBigUpLine,
+  IconEdit,
+} from "@tabler/icons-react";
 import React from "react";
 import { Link } from "react-router-dom";
+import useCookieValues from "../hooks/useCookieValues.js";
 import CommentEditor from "./CommentEditor.jsx";
 import CommentsList from "./CommentsList.jsx";
 
 export default function PostCard({ post, showCommentCard }) {
+  const [setCookies, removeCookies, { userName }] = useCookieValues();
   return (
     <>
       <Card align="center" key={post.id} radius="md" withBorder mt={10}>
@@ -18,6 +24,18 @@ export default function PostCard({ post, showCommentCard }) {
             <Link to={`/downvote`} relative>
               <IconArrowBigDownLine size={15} />
             </Link>
+            {post.user.username == userName ? (
+              <>
+                <br />
+                <Link
+                  to={`/post/${post.id}/edit`}
+                  state={{ subredditId: post.subreddit_id }}
+                  relative
+                >
+                  <IconEdit size={17} />
+                </Link>
+              </>
+            ) : null}
           </Grid.Col>
           <Grid.Col span={11}>
             <Flex
@@ -45,15 +63,14 @@ export default function PostCard({ post, showCommentCard }) {
           </Grid.Col>
         </Grid>
       </Card>
-
       {showCommentCard ? (
         <Card radius="md" withBorder mt={10}>
           <CommentEditor postId={post.id} />
         </Card>
       ) : null}
 
-      {post.comments?.length > 0 ? (
-        <CommentsList comments={post.comments} />
+      {post.comments?.comments?.length > 0 ? (
+        <CommentsList comments={post.comments.comments} />
       ) : null}
     </>
   );

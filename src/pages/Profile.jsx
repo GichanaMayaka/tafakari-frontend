@@ -1,3 +1,4 @@
+import { Text } from "@mantine/core";
 import AppShellMain from "../components/AppShellMain";
 import LoadingScreen from "../components/LoadingScreen";
 import ProfileTabs from "../components/ProfileTabs";
@@ -11,6 +12,9 @@ function Profile() {
 
   return (
     <AppShellMain>
+      <Text align="left" fw="bolder">
+        Profile
+      </Text>
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} />
       ) : (

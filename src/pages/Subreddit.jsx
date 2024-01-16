@@ -20,7 +20,7 @@ export default function Subreddit() {
       ) : (
         <>
           <Card radius="md" withBorder>
-            <Text align="center" component="h1" fw="bolder">
+            <Text align="center" fw="bolder">
               r/{subreddit.name}
             </Text>
           </Card>

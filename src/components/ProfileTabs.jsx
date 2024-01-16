@@ -21,7 +21,7 @@ function ProfileTabs({ posts, comments }) {
       </Tabs.List>
 
       <Tabs.Panel value="posts">
-        {posts.map((post) => {
+        {posts?.map((post) => {
           return (
             <a
               onClick={(e) =>
