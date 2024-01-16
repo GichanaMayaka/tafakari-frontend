@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Select, TextInput } from "@mantine/core";
+import { Button, Card, Flex, Select, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +52,9 @@ export default function PostCreator() {
 
   return (
     <AppShellMain>
+      <Text align="left" fw="bolder">
+        Create a Post
+      </Text>
       <form onSubmit={form.onSubmit((values) => handleCreatePost(values))}>
         <Select
           data={availableSubreddits}

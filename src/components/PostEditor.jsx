@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Select, TextInput } from "@mantine/core";
+import { Button, Card, Flex, Select, Text, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -39,9 +39,9 @@ function PostEditor() {
 
   const [editor, editorContent] = useRichTextEditor(form, post.text);
 
-  function handleEditPost(formValues) {
+  function handleEditPost(formValues, subredditId) {
     const payload = {
-      subreddit_id: subreddit.id,
+      subreddit_id: subredditId,
       title: formValues.title,
       text: formValues.editorContent,
     };
@@ -61,10 +61,17 @@ function PostEditor() {
 
   return (
     <AppShellMain>
+      <Text align="left" fw="bolder">
+        Edit Post
+      </Text>
       {postIsLoading || subredditIsLoading ? (
         <LoadingScreen isLoading={postIsLoading || subredditIsLoading} />
       ) : (
-        <form onSubmit={form.onSubmit((values) => handleEditPost(values))}>
+        <form
+          onSubmit={form.onSubmit((values) =>
+            handleEditPost(values, subreddit.id)
+          )}
+        >
           <Select
             data={[`r/${subreddit.name}`]}
             mb={10}
