@@ -5,20 +5,20 @@ import { Link } from "react-router-dom";
 
 export default function CommentCard({ comment }) {
   return (
-    <Stack justify="left" mb={30} spacing="sm">
-      <Text>
+    <Stack justify="left" mb={30} spacing="sm" key={comment.id}>
+      <Text key={comment.id}>
         u/{comment.user.username} .{" "}
         {Math.round((new Date() - new Date(comment.created_on)) / (1000 * 60))}{" "}
         mins ago
       </Text>
       <Flex direction="row" justify="flex-start" align="center" gap="sm">
-        <Text>{comment.comment}</Text>
+        <Text key={comment.id}>{comment.comment}</Text>
       </Flex>
       <Flex direction="row" justify="flex-start" align="center" gap="sm">
         <Link to={`#`} relative>
           <IconArrowBigUpLine size={15} />
         </Link>
-        <Text>{comment.votes}</Text>
+        <Text key={comment.id}>{comment.votes}</Text>
         <Link to={`#`} relative>
           <IconArrowBigDownLine size={15} />
         </Link>

@@ -81,7 +81,6 @@ function AppShellMain({ children }) {
             <Burger
               opened={!opened}
               onClick={toggle}
-              hiddenFrom="md"
               color="#a32d25"
               size="sm"
               aria-label="Toggle Navigation"

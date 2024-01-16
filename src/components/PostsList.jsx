@@ -8,7 +8,7 @@ export default function PostsList({ posts }) {
   return posts.map((post) => {
     return (
       <>
-        <a onClick={(e) => navigation(`${post.id}`)}>
+        <a onClick={(e) => navigation(`${post.id}`)} key={post.id}>
           <PostCard post={post} showCommentCard={false} />
         </a>
       </>

@@ -35,6 +35,7 @@ export default function CommunitiesNavigation() {
         />
         {availableSubreddits.map((subreddit) => (
           <NavLink
+            key={subreddit.id}
             label={
               <Text size="md" weight={700}>
                 {subreddit.label}

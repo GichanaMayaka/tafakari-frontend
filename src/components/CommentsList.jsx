@@ -11,6 +11,7 @@ export default function CommentsList({ comments }) {
       {comments?.map((comment) =>
         comment?.post_id ? (
           <a
+            key={comment.id}
             className="link-no-decoration"
             onClick={(e) =>
               navigation(`/posts/${comment.post_id}/`, { replace: true })
