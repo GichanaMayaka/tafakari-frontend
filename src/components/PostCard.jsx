@@ -5,24 +5,43 @@ import {
   IconEdit,
 } from "@tabler/icons-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCookieValues from "../hooks/useCookieValues.js";
+import { errorHandler, fetchData } from "../utils.js";
 import CommentEditor from "./CommentEditor.jsx";
 import CommentsList from "./CommentsList.jsx";
 import RenderRichText from "./RenderRichText.jsx";
 
 export default function PostCard({ post, showCommentCard }) {
-  const [setCookies, removeCookies, { userName }] = useCookieValues();
+  const [votes, setVotes] = React.useState(post.votes);
+  const navigation = useNavigate();
+  const [setCookies, removeCookies, { userName, accessToken }] =
+    useCookieValues();
+
+  function handleUpvote(postId) {
+    const url = `/app/posts/${postId}/upvote`;
+    fetchData(url, "GET", accessToken)
+      .then((response) => setVotes((prevVotes) => prevVotes + 1))
+      .catch((error) => errorHandler(error.status, navigation, false));
+  }
+
+  function handleDownvote(postId) {
+    const url = `/app/posts/${postId}/downvote`;
+    fetchData(url, "GET", accessToken)
+      .then((response) => setVotes((prevVotes) => prevVotes - 1))
+      .catch((error) => errorHandler(error.status, navigation, false));
+  }
+
   return (
     <>
       <Card align="center" key={post.id} radius="md" withBorder mt={10}>
         <Grid gutter="xl" justify="left">
           <Grid.Col span={1}>
-            <Link to={`/upvote`} relative>
+            <Link onClick={(e) => handleUpvote(post.id)} relative>
               <IconArrowBigUpLine size={15} />
             </Link>
-            <Text>{post.votes}</Text>
-            <Link to={`/downvote`} relative>
+            <Text>{votes}</Text>
+            <Link onClick={(e) => handleDownvote(post.id)} relative>
               <IconArrowBigDownLine size={15} />
             </Link>
             {post.user.username == userName ? (
