@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import useCookieValues from "../hooks/useCookieValues.js";
 import CommentEditor from "./CommentEditor.jsx";
 import CommentsList from "./CommentsList.jsx";
+import RenderRichText from "./RenderRichText.jsx";
 
 export default function PostCard({ post, showCommentCard }) {
   const [setCookies, removeCookies, { userName }] = useCookieValues();
@@ -57,7 +58,7 @@ export default function PostCard({ post, showCommentCard }) {
             </Flex>
             <Stack h={250}>
               <Text align="left" component="p">
-                {post.text}
+                <RenderRichText content={post.text} />
               </Text>
             </Stack>
           </Grid.Col>

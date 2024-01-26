@@ -2,6 +2,7 @@ import { Flex, Stack, Text } from "@mantine/core";
 import { IconArrowBigDownLine, IconArrowBigUpLine } from "@tabler/icons-react";
 import { default as React } from "react";
 import { Link } from "react-router-dom";
+import RenderRichText from "./RenderRichText";
 
 export default function CommentCard({ comment }) {
   return (
@@ -12,7 +13,9 @@ export default function CommentCard({ comment }) {
         mins ago
       </Text>
       <Flex direction="row" justify="flex-start" align="center" gap="sm">
-        <Text key={comment.id}>{comment.comment}</Text>
+        <Text key={comment.id}>
+          <RenderRichText content={comment.comment} />
+        </Text>
       </Flex>
       <Flex direction="row" justify="flex-start" align="center" gap="sm">
         <Link to={`#`} relative>
