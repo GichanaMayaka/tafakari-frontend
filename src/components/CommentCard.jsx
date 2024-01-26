@@ -8,7 +8,7 @@ export default function CommentCard({ comment }) {
   return (
     <Stack justify="left" mb={30} spacing="sm" key={comment.id}>
       <Text key={comment.id}>
-        u/{comment.user.username} .{" "}
+        u/{comment.user.username} - {" "}
         {Math.round((new Date() - new Date(comment.created_on)) / (1000 * 60))}{" "}
         mins ago
       </Text>

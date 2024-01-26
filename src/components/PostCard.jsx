@@ -71,7 +71,7 @@ export default function PostCard({ post, showCommentCard }) {
       ) : null}
 
       {post.comments?.comments?.length > 0 ? (
-        <CommentsList comments={post.comments.comments} />
+        <CommentsList comments={post.comments.comments} showLink={false} />
       ) : null}
     </>
   );

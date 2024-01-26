@@ -34,7 +34,7 @@ function ProfileTabs({ posts, comments }) {
         })}
       </Tabs.Panel>
       <Tabs.Panel value="comments">
-        <CommentsList comments={comments} />
+        <CommentsList comments={comments} showLink={true} />
       </Tabs.Panel>
     </Tabs>
   );

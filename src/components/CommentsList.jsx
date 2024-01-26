@@ -3,13 +3,13 @@ import React from "react";
 import CommentCard from "./CommentCard";
 import { useNavigate } from "react-router-dom";
 
-export default function CommentsList({ comments }) {
+export default function CommentsList({ comments, showLink }) {
   const navigation = useNavigate();
 
   return (
     <Card align="left" radius="md" withBorder mt={10}>
       {comments?.map((comment) =>
-        comment?.post_id ? (
+        showLink ? (
           <a
             key={comment.id}
             className="link-no-decoration"
